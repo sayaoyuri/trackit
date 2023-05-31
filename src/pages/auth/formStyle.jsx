@@ -33,9 +33,12 @@ export const Form = styled.form`
     background-color: #52B6FF;
     color: #FFFFFF;
     font-size: 21px;
+    margin-bottom: 25px;
     border: none;
     cursor: pointer;
-    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:disabled {
       cursor: progress;

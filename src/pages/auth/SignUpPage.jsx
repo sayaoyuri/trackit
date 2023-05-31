@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../constants';
 import { Form } from './formStyle';
 import trackitLogo from '../../assets/style/images/TrackIt.svg';
+import { ThreeDots } from 'react-loader-spinner';
 
 function SignUpPage() {
   const [email, setEmail] = useState('');
@@ -73,7 +74,9 @@ function SignUpPage() {
           value={image} 
           onChange={(ev) => setImage(ev.target.value)} 
         />
-        <button type='submit' disabled={fieldStatus}>Cadastrar</button>
+        <button type='submit' disabled={fieldStatus}>
+          {!fieldStatus ? 'Cadastrar' : <ThreeDots width="60" height="60" color="#ffffff" />}
+        </button>
         <Link to='/'>
           <p>Já tem uma conta? Faça login!</p>
         </Link>

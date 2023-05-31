@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ThreeDots } from 'react-loader-spinner';
+
 import { Form } from './formStyle';
 import trackitLogo from '../../assets/style/images/TrackIt.svg';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fieldStatus, setFieldStatus] = useState ( false );
 
   return (
       <Form>
@@ -25,7 +28,9 @@ function LoginPage() {
           value={password} 
           required
         />
-        <button>Entrar</button>
+        <button disabled={fieldStatus}>
+          {fieldStatus ? 'Entrar' : <ThreeDots width="60" height="60" color="#ffffff" />}
+        </button>
         <Link to='/cadastro'>
           <p>Não tem uma conta? Cadastre-se!</p>
         </Link>

@@ -1,141 +1,102 @@
-import styled from "styled-components";
-import { WEEKDAYS } from "../constants";
-import { useState } from "react";
+import axios from "axios";
+import { useContext, useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
+import { BASE_URL, WEEKDAYS } from "../constants";
+
+import { LogedUserContext } from "../context/LogedUserContext";
+
+import { Day, CreateHabitsHeader, CreateHabitContainer } from "../pages/habits/CreateHabitStyle";
 
 function CreateHabit() {
-  const [createHab, setCreateHat] = useState(false);
-  const [name, setName] = useState();
+  const [createHab, setCreateHab] = useState(false);
+  const [fieldStatus, setFieldStatus] = useState (false);
+  const [name, setName] = useState('');
   const [days, setDays] = useState( [] );
   console.log(days);
 
+  const {logedUser} = useContext(LogedUserContext);
+
+  function resetForm() {
+    setCreateHab(false);
+    setFieldStatus(false);
+    setDays([]); 
+    setName('');
+  }
+
+  function createHabit(ev) {
+    ev.preventDefault();
+    setFieldStatus(true);
+
+    const config = {
+      headers: { Authorization: `Bearer ${logedUser.token}`}
+    }
+
+    const body = { name, days };
+
+    axios.post(`${BASE_URL}habits`, body, config)
+      .then(resp => {
+        console.log(resp); 
+        resetForm();
+      })
+      .catch(error => {
+        console.log(error);
+        alert(error.response.data.message);
+        setFieldStatus(false);
+      });
+  }
+
   function addDay(ev) {
     ev.preventDefault();
+    const day = parseInt(ev.target.value);
 
-    if(!days.includes(ev.target.value)) {
-      const daysAux = [...days, ev.target.value];
+    if(!days.includes(day)) {
+      const daysAux = [...days, day];
       setDays(daysAux);
     } else {
-      days.splice(days.indexOf(ev.target.value), 1);
+      days.splice(days.indexOf(day), 1);
       setDays( [...days] );
     }
   }
 
   return (
     <>
-      <HabitsHeader>
+      <CreateHabitsHeader>
         <p>Meus hábitos</p>
-        <button onClick={() => !createHab ? setCreateHat(true) : setCreateHat(false)}>+</button>
-      </HabitsHeader>
-
+        <button onClick={() => !createHab ? setCreateHab(true) : setCreateHab(false)}>+</button>
+      </CreateHabitsHeader>
       {createHab && 
-        <HabitContainer>
+        <CreateHabitContainer onSubmit={createHabit}>
           <input
             type="text"
             placeholder='nome do habito'
             value={name}
             onChange={(ev) => setName(ev.target.value)}
             required
+            disabled={fieldStatus}
             />
           <ul>
-            {WEEKDAYS.map((day, i) => <Li key={i} value={i + 1} onClick={(ev) => addDay(ev)} selected={days.includes(i + 1)}>{day}</Li>)}
+            {WEEKDAYS.map((day, i) => (
+              <Day 
+                key={i} 
+                value={i + 1} 
+                onClick={(ev) => addDay(ev)} selected={days.includes(i + 1)} 
+                disabled={fieldStatus}>
+                {day}
+              </Day>)
+            )}
           </ul>
           <div>
-            <button>Cancelar</button>
-            <button>Salvar</button>
+            <button type="button" disabled={fieldStatus} onClick={resetForm}>
+              {!fieldStatus ? 'Cancelar' : <ThreeDots width="35" height="35" color="#52B6FF" />}
+            </button>
+            <button type="submit" disabled={fieldStatus}>
+            {!fieldStatus ? 'Salvar' : <ThreeDots width="35" height="35" color="#fff" />}
+            </button>
           </div>
-        </HabitContainer>
+        </CreateHabitContainer>
       }
     </>
   );
 }
 
 export default CreateHabit;
-
-const HabitsHeader = styled.header`
-  margin: 108px 5px 28px 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'Lexend Deca';
-  color: #126BA5;
-
-  button {
-    width: 40px;
-    height: 35px;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 26px;
-    background-color: #52B6FF;
-  }
-`;
-
-const Li = styled.li`
-  background-color: ${props => props.selected ? '#cfcfcf' : '#ffffff'};
-  font-family: 'Lexend Deca';
-  font-size: 19px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-  color: #DBDBDB;
-  border: 1px solid #D5D5D5;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-
-const HabitContainer = styled.form`
-  margin: 0px 36px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  input {
-    width: 100%;
-    border: 1px solid #D5D5D5;
-    height: 45px;
-    padding-left: 5px;
-    font-size: 19px;
-    color: #666666;
-
-    &::placeholder {
-      color: #DBDBDB;
-    }
-  }
-
-  ul {
-    display: flex;
-    gap: 4px;
-  }
-
-  div {
-    display: flex;
-    gap: 15px;
-    justify-content: flex-end;
-    margin-top: 29px;
-
-    button {
-      width: 84px;
-      height: 35px;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-
-      &:disabled {
-        cursor: progress;
-      }
-    }
-
-    & :nth-child(1) {
-      background-color: transparent;
-      color: #52B6FF;
-    }
-
-    & :nth-child(2) {
-      background-color: #52B6FF;
-      color: #fff;
-    }
-  }
-`;

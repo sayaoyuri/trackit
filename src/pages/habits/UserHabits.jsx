@@ -1,12 +1,30 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Day } from "./CreateHabitStyle";
-import { WEEKDAYS } from "../../constants";
 
+import { BASE_URL, WEEKDAYS } from "../../constants";
+
+import { LogedUserContext } from "../../context/LogedUserContext";
 import del from '../../assets/images/delete.svg';
+import axios from "axios";
 
-function UserHabits() {
-  const [userHabits, setUserHabits] = useState( undefined )
+function UserHabits( {reload} ) {
+  const [userHabits, setUserHabits] = useState( undefined );
+
+  const { logedUser } = useContext(LogedUserContext);
+
+  useEffect(() => {
+    const config = {
+      headers: { Authorization: `Bearer ${logedUser.token}` }
+    }
+
+    axios.get(`${BASE_URL}habits`, config)
+    .then(resp => {
+      console.log(resp);
+      setUserHabits(resp.data);
+    })
+    .catch(error => console.log(error));
+  }, [reload]);
 
   if(!userHabits) {
     return <P>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</P>;
@@ -14,16 +32,16 @@ function UserHabits() {
 
   return (
     <>
-      <Habit>
-        <p>Habito</p>
-        <img src={del} alt="Delete" />
-        <div>
-          {WEEKDAYS.map((day, i) => (
-            <Day key={i} selected={true}>{day}</Day>
-            )
-            )}
-        </div>
-      </Habit>
+      {userHabits.map((habbit) => (
+        <Habit key={habbit.id}>
+          <p>{habbit.name}</p>
+          <img src={del} alt="Delete" />
+          <div>
+            {WEEKDAYS.map((day, i) => (<Day key={i} selected={habbit.days.includes(i + 1)}>{day}</Day>))}
+          </div>
+        </Habit>
+        )
+      )}
     </>
   );
 };
@@ -60,4 +78,4 @@ const Habit = styled.section`
     display: flex;
     gap: 4px;
   }
-`
+`;

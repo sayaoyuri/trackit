@@ -7,7 +7,7 @@ import { LogedUserContext } from "../context/LogedUserContext";
 
 import { Day, CreateHabitsHeader, CreateHabitContainer } from "../pages/habits/CreateHabitStyle";
 
-function CreateHabit() {
+function CreateHabit( {reload, setReload} ) {
   const [createHab, setCreateHab] = useState(false);
   const [fieldStatus, setFieldStatus] = useState (false);
   const [name, setName] = useState('');
@@ -37,6 +37,7 @@ function CreateHabit() {
       .then(resp => {
         console.log(resp); 
         resetForm();
+        setReload(reload + 1);
       })
       .catch(error => {
         console.log(error);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { LogedUserProvider } from "./context/LogedUserContext.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import LoginPage from './pages/auth/LoginPage.jsx';
@@ -9,13 +10,15 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LoginPage/> }/>
-          <Route path="/cadastro" element={<SignUpPage/> }/>
+      <LogedUserProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LoginPage/> }/>
+            <Route path="/cadastro" element={<SignUpPage/> }/>
 
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </LogedUserProvider>
     </>
   );
 }

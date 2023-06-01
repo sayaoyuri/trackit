@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { LogedUserContext } from '../../context/LogedUserContext';
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { ThreeDots } from 'react-loader-spinner';
 
 import { Form } from './formStyle';
-import trackitLogo from '../../assets/style/images/TrackIt.svg';
+import trackitLogo from '../../assets/images/TrackIt.svg';
 import { BASE_URL } from '../../constants';
 
 function LoginPage( {setUserData} ) {
@@ -15,6 +15,7 @@ function LoginPage( {setUserData} ) {
   const [fieldStatus, setFieldStatus] = useState ( false );
 
   const { setLogedUser } = useContext(LogedUserContext);  
+  const navigate = useNavigate();
 
   function login(ev) {
     ev.preventDefault();
@@ -30,6 +31,7 @@ function LoginPage( {setUserData} ) {
         const { email, name, image, token } = resp.data;
 
         setLogedUser({ email, name, image, token });
+        navigate('/hoje');
       })
       .catch(error => {
         alert(error.response.data.message);

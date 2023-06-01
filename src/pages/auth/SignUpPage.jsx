@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { BASE_URL } from '../../constants';
 import { Form } from './formStyle';
-import trackitLogo from '../../assets/style/images/TrackIt.svg';
+import trackitLogo from '../../assets/images/TrackIt.svg';
 import { ThreeDots } from 'react-loader-spinner';
 
 function SignUpPage() {

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import LoginPage from './pages/auth/LoginPage.jsx';
 import SignUpPage from "./pages/auth/SignUpPage.jsx";
+import Today from './pages/Today.jsx';
 
 function App() {
   axios.defaults.headers.common['Authorization'] = 'M813n9erPvENXeuGPzKDL1Iu';
@@ -15,7 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LoginPage/> }/>
             <Route path="/cadastro" element={<SignUpPage/> }/>
-
+            <Route path="/hoje" element={<Today/> }/>
           </Routes>
         </BrowserRouter>
       </LogedUserProvider>

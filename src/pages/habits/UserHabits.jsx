@@ -5,13 +5,25 @@ import { Day } from "./CreateHabitStyle";
 import { BASE_URL, WEEKDAYS } from "../../constants";
 
 import { LogedUserContext } from "../../context/LogedUserContext";
-import del from '../../assets/images/delete.svg';
+import delBtn from '../../assets/images/delete.svg';
 import axios from "axios";
 
-function UserHabits( {reload} ) {
+function UserHabits( {reload, setReload} ) {
   const [userHabits, setUserHabits] = useState( undefined );
 
   const { logedUser } = useContext(LogedUserContext);
+
+  function deleteHabit(id) {
+    const config = {
+      headers: { Authorization: `Bearer ${logedUser.token}` }
+    }
+
+    axios.delete(`${BASE_URL}habits/${id}`, config)
+      .then(resp => console.log(resp))
+      .catch(error => console.log(error));
+      
+      setTimeout(() => setReload(reload + 1), 1000);
+  }
 
   useEffect(() => {
     const config = {
@@ -35,7 +47,7 @@ function UserHabits( {reload} ) {
       {userHabits.map((habbit) => (
         <Habit key={habbit.id}>
           <p>{habbit.name}</p>
-          <img src={del} alt="Delete" />
+          <img src={delBtn} alt="Delete" onClick={() => deleteHabit(habbit.id)}/>
           <div>
             {WEEKDAYS.map((day, i) => (<Day key={i} selected={habbit.days.includes(i + 1)}>{day}</Day>))}
           </div>

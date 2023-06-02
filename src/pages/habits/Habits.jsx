@@ -10,7 +10,7 @@ function Habits() {
     <>
       <NavBar />
       <CreateHabit reload={reload} setReload={setReload}/>
-      <UserHabits reload={reload}/>
+      <UserHabits reload={reload} setReload={setReload}/>
     </>
   );
 }

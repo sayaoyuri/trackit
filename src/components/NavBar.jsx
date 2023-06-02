@@ -3,13 +3,12 @@ import { useContext } from "react";
 import { LogedUserContext } from "../context/LogedUserContext";
 
 function NavBar() {
-  // const { logedUser } = useContext(LogedUserContext);
+  const { logedUser } = useContext(LogedUserContext);
 
   return (
     <Nav>
       <p>Trackit</p>
-      {/* <img src={logedUser.image} alt="User photo" /> */}
-      <img src='' alt="User photo" />
+      <img src={logedUser.image} alt="User photo" />
     </Nav>
   );
 }
@@ -18,6 +17,7 @@ export default NavBar;
 
 const Nav = styled.nav`
   position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
   width: 100%;

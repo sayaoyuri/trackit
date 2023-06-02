@@ -14,15 +14,19 @@ function UserHabits( {reload, setReload} ) {
   const { logedUser } = useContext(LogedUserContext);
 
   function deleteHabit(id) {
-    const config = {
-      headers: { Authorization: `Bearer ${logedUser.token}` }
-    }
+    const del = confirm('Deseja deletar este habito?');
 
-    axios.delete(`${BASE_URL}habits/${id}`, config)
+    if(del) {
+      const config = {
+        headers: { Authorization: `Bearer ${logedUser.token}` }
+      }
+
+      axios.delete(`${BASE_URL}habits/${id}`, config)
       .then(resp => console.log(resp))
       .catch(error => console.log(error));
       
       setTimeout(() => setReload(reload + 1), 1000);
+    }
   }
 
   useEffect(() => {
@@ -38,7 +42,7 @@ function UserHabits( {reload, setReload} ) {
     .catch(error => console.log(error));
   }, [reload]);
 
-  if(!userHabits) {
+  if(!userHabits || userHabits.length === 0) {
     return <P>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</P>;
   }
 

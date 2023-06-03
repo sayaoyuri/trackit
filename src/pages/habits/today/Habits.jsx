@@ -41,6 +41,11 @@ function Habits() {
         const aux = {...logedUser};
         aux.habits = resp.data;
 
+        const done = aux.habits.map(habit => habit.done).filter(hab => hab === true).length;
+
+        aux.dayProgressStat = done;
+        aux.dayProgressText = done === 0 ? 'Nenhum habito concluido hoje' : `${( done / aux.habits.length * 100 ).toFixed(0)}% dos hábitos concluídos`;
+
         setLogedUser(aux);
       })
       .catch(error => console.log(error));
@@ -57,7 +62,7 @@ function Habits() {
         <h1>
           {`${FULLWEEKDAYS.at( dayjs().get('day') )}, ${dayjs().format('DD')}/${dayjs().format('MM') }`}
         </h1>
-        <p>67% dos habitos concluidos</p>
+        <p>{logedUser.dayProgressText}</p>
       </Header>
       {
         logedUser.habits.map(habit => (

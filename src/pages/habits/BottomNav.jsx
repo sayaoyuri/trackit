@@ -1,9 +1,13 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
-import { Link } from "react-router-dom";
+import { LogedUserContext } from "../../context/LogedUserContext";
 
 function BottomNav() {
+  const { logedUser } = useContext(LogedUserContext);
+
   return (
     <Nav>
         <Link to='/habitos'>
@@ -13,7 +17,8 @@ function BottomNav() {
         <Link to='/hoje'>
           <ProgressBar>
             <CircularProgressbar 
-              value={80}
+              value={logedUser.dayProgressStat * 100}
+              maxValue={logedUser.habits.length * 100}
               text={'Hoje'}
               background 
               backgroundPadding={6}

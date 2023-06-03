@@ -31,7 +31,7 @@ function BottomNav() {
           </ProgressBar>
         </Link>
 
-        <Link to='historico'>
+        <Link to='/historico'>
           <p>Historico</p>
         </Link>
       </Nav>

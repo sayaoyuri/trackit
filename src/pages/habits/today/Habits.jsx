@@ -83,7 +83,7 @@ function Habits() {
 
 export default Habits;
 
-const Header = styled.header`
+export const Header = styled.header`
   margin-top: 98px;
   padding: 5px;
   font-family: 'Lexend Deca';

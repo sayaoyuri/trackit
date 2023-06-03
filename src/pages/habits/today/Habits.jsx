@@ -1,38 +1,62 @@
+import axios from "axios";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
+import 'react-circular-progressbar/dist/styles.css';
+
+import BottomNav from "../BottomNav";
 
 import checkBtn from '../../../assets/images/check.svg';
 
+import dayjs from "dayjs";
+import { LogedUserContext } from "../../../context/LogedUserContext";
+import { BASE_URL, FULLWEEKDAYS } from "../../../constants";
+
 function Habits() {
+  const { logedUser, setLogedUser } = useContext(LogedUserContext);
+
+  useEffect(() => {
+    if(logedUser.token) {
+      const config = {
+        headers: { Authorization: `Bearer ${logedUser.token}` }
+      }
+
+      axios.get(`${BASE_URL}habits/today`, config)
+      .then(resp => {
+        console.log(resp)
+        const aux = {...logedUser};
+        aux.habits = resp.data;
+
+        setLogedUser(aux);
+      })
+      .catch(error => console.log(error));
+    }
+  }, [])
+
+  if(!logedUser.habits) {
+    return <div>Carregando</div>
+  }
+
   return(
     <>
       <Header>
-        <h1>Segunda, 17/05</h1>
+        <h1>
+          {`${FULLWEEKDAYS.at( dayjs().get('day') )}, ${dayjs().format('DD')}/${dayjs().format('MM') }`}
+        </h1>
         <p>67% dos habitos concluidos</p>
       </Header>
-      <Container>
-        <h1>Habito Titulo</h1>
-        <p>Sequência atual: 3 dias</p>
-        <p>Seu recorde: 5 dias</p>
-        <Button checked={false}>
-          <img src={checkBtn} alt="Check Button" />
-        </Button>
-      </Container>
-      <Container>
-        <h1>Habito Titulo</h1>
-        <p>Sequência atual: 3 dias</p>
-        <p>Seu recorde: 5 dias</p>
-        <Button checked={true}>
-          <img src={checkBtn} alt="Check Button" />
-        </Button>
-      </Container>
-      <Container>
-        <h1>Habito Titulo</h1>
-        <p>Sequência atual: 3 dias</p>
-        <p>Seu recorde: 5 dias</p>
-        <Button checked={true}>
-          <img src={checkBtn} alt="Check Button" />
-        </Button>
-      </Container>
+      {
+        logedUser.habits.map(habit => (
+          <Container key={habit.id}>
+            <h1>{habit.name}</h1>
+            <p>{`Sequência atual: ${habit.currentSequence}`}</p>
+            <p>{`Seu recorde: ${habit.highestSequence}`}</p>
+            <Button checked={habit.done}>
+              <img src={checkBtn} alt="Check Button" />
+            </Button>
+          </Container>
+        ))
+      }
+      <BottomNav />
     </>
   );
 }
@@ -40,6 +64,8 @@ function Habits() {
 export default Habits;
 
 const Header = styled.header`
+  margin-top: 98px;
+  padding: 5px;
   font-family: 'Lexend Deca';
   margin-bottom: 28px;
 
@@ -73,6 +99,7 @@ const Container = styled.div`
 
 const Button = styled.button`
   position: absolute;
+  z-index: 2;
   top: 10px;
   right: 13px;
   width: 69px;

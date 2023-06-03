@@ -1,8 +1,12 @@
 import Habits from "./Habits";
+import NavBar from '../../../components/NavBar'
 
 function Today() {
   return (
-    <Habits />
+    <>
+      <NavBar/>
+      <Habits />
+    </>
   );
 }
 

@@ -10,19 +10,21 @@ function BottomNav() {
           <p>Habitos</p>
         </Link>
 
-        <ProgressBar>
-          <CircularProgressbar 
-            value={80}
-            text={'Hoje'}
-            background 
-            backgroundPadding={6}
-            styles={buildStyles({
-            backgroundColor: "#52B6FF",
-            textColor: "#fff",
-            pathColor: "#fff",
-            trailColor: "transparent"
-        })}/>
-        </ProgressBar>
+        <Link to='/hoje'>
+          <ProgressBar>
+            <CircularProgressbar 
+              value={80}
+              text={'Hoje'}
+              background 
+              backgroundPadding={6}
+              styles={buildStyles({
+                backgroundColor: "#52B6FF",
+                textColor: "#fff",
+                pathColor: "#fff",
+                trailColor: "transparent"
+              })}/>
+          </ProgressBar>
+        </Link>
 
         <Link to='historico'>
           <p>Historico</p>

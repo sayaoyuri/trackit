@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import 'react-circular-progressbar/dist/styles.css';
 
@@ -13,6 +13,21 @@ import { BASE_URL, FULLWEEKDAYS } from "../../../constants";
 
 function Habits() {
   const { logedUser, setLogedUser } = useContext(LogedUserContext);
+  const [reload, setReload] = useState(0);
+
+  function checkHabit(habit) {
+    const config = {
+      headers: { Authorization: `Bearer ${logedUser.token}` }
+    }
+
+    const action = habit.done ? 'uncheck' : 'check'
+
+    axios.post(`${BASE_URL}habits/${habit.id}/${action}`, '', config)
+    .then(resp => console.log(resp))
+    .catch(error => console.log(error));
+
+    setTimeout(() => setReload(reload + 1), 500)
+  }
 
   useEffect(() => {
     if(logedUser.token) {
@@ -30,7 +45,7 @@ function Habits() {
       })
       .catch(error => console.log(error));
     }
-  }, [])
+  }, [reload])
 
   if(!logedUser.habits) {
     return <div>Carregando</div>
@@ -46,11 +61,11 @@ function Habits() {
       </Header>
       {
         logedUser.habits.map(habit => (
-          <Container key={habit.id}>
+          <Container key={habit.id} done={habit.done} current={habit.currentSequence} highest={habit.highestSequence}>
             <h1>{habit.name}</h1>
-            <p>{`Sequência atual: ${habit.currentSequence}`}</p>
-            <p>{`Seu recorde: ${habit.highestSequence}`}</p>
-            <Button checked={habit.done}>
+            <p>Sequência atual: <span className="current">{habit.currentSequence} dias</span></p>
+            <p>Seu recorde: <span className="highest">{habit.highestSequence} dias</span></p>
+            <Button checked={habit.done} onClick={() => checkHabit(habit)}>
               <img src={checkBtn} alt="Check Button" />
             </Button>
           </Container>
@@ -94,6 +109,14 @@ const Container = styled.div`
 
   p {
     font-size: 13px;
+  }
+
+  .current {
+    color: ${props => props.done && '#8FC549'}
+  }
+
+  .highest {
+    color: ${props => props.highest === props.current && props.current > 0 && '#8FC549'}
   }
 `;
 

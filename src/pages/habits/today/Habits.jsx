@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import 'react-circular-progressbar/dist/styles.css';
 
-import BottomNav from "../BottomNav";
+import BottomNav from "../../../components/BottomNav.jsx";
 
 import checkBtn from '../../../assets/images/check.svg';
 

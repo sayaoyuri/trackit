@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import NavBar from "../components/NavBar";
-import BottomNav from "./habits/BottomNav";
-import { Header } from "./habits/today/Habits";
+import BottomNav from "../components/BottomNav.jsx";
+import { Header } from "./habits/today/Habits.jsx";
 
 function History() {
   return (

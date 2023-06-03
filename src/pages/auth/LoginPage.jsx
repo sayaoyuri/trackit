@@ -49,6 +49,7 @@ function LoginPage( {setUserData} ) {
           onChange={(ev) => setEmail(ev.target.value)} 
           required 
           data-test='email-input'
+          disabled={fieldStatus}
         />
         <input 
           type="password" 
@@ -57,6 +58,7 @@ function LoginPage( {setUserData} ) {
           value={password} 
           required
           data-test='password-input'
+          disabled={fieldStatus}
         />
         <button type="submit" disabled={fieldStatus} data-test='login-btn'>
           {!fieldStatus ? 'Entrar' : <ThreeDots width="60" height="60" color="#ffffff" />}

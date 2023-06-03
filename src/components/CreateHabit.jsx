@@ -80,8 +80,8 @@ function CreateHabit( {reload, setReload} ) {
             {WEEKDAYS.map((day, i) => (
               <Day 
                 key={i} 
-                value={i + 1} 
-                onClick={(ev) => addDay(ev)} selected={days.includes(i + 1)} 
+                value={i} 
+                onClick={(ev) => addDay(ev)} selected={days.includes(i)} 
                 disabled={fieldStatus} 
                 data-test='habit-day'>
                 {day}

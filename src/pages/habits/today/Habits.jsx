@@ -107,6 +107,10 @@ const Container = styled.div`
   font-family: 'Lexend Deca';
   color: #333;
 
+  h1, p {
+    color: #666666;
+  }
+
   h1 {
     font-size: 20px;
     margin-bottom: 7px;

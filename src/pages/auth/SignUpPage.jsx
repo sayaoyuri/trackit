@@ -76,7 +76,7 @@ function SignUpPage() {
           disabled={fieldStatus}
           value={image} 
           onChange={(ev) => setImage(ev.target.value)} 
-          data-test='user-image'
+          data-test='user-image-input'
         />
         <button type='submit' disabled={fieldStatus} data-test='signup-btn'>
           {!fieldStatus ? 'Cadastrar' : <ThreeDots width="60" height="60" color="#ffffff" />}

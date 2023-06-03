@@ -48,6 +48,7 @@ function LoginPage( {setUserData} ) {
           value={email} 
           onChange={(ev) => setEmail(ev.target.value)} 
           required 
+          data-test='email-input'
         />
         <input 
           type="password" 
@@ -55,11 +56,12 @@ function LoginPage( {setUserData} ) {
           onChange={(ev) => setPassword(ev.target.value)}
           value={password} 
           required
+          data-test='password-input'
         />
-        <button type="submit" disabled={fieldStatus}>
+        <button type="submit" disabled={fieldStatus} data-test='login-btn'>
           {!fieldStatus ? 'Entrar' : <ThreeDots width="60" height="60" color="#ffffff" />}
         </button>
-        <Link to='/cadastro'>
+        <Link to='/cadastro' data-test='signup-link'>
           <p>Não tem uma conta? Cadastre-se!</p>
         </Link>
       </Form>

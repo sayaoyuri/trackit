@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
-import { LogedUserContext } from "../../context/LogedUserContext";
+import { LogedUserContext } from "../context/LogedUserContext";
 
 function BottomNav() {
   const { logedUser } = useContext(LogedUserContext);
 
   return (
-    <Nav>
-        <Link to='/habitos'>
+    <Nav data-test='menu'>
+        <Link to='/habitos' data-test='habit-link'>
           <p>Habitos</p>
         </Link>
 
-        <Link to='/hoje'>
+        <Link to='/hoje' data-test='today-link'>
           <ProgressBar>
             <CircularProgressbar 
               value={logedUser.dayProgressStat * 100}
@@ -31,7 +31,7 @@ function BottomNav() {
           </ProgressBar>
         </Link>
 
-        <Link to='/historico'>
+        <Link to='/historico' data-test='history-link'>
           <p>Historico</p>
         </Link>
       </Nav>

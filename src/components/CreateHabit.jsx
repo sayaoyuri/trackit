@@ -63,10 +63,10 @@ function CreateHabit( {reload, setReload} ) {
     <>
       <CreateHabitsHeader>
         <p>Meus hábitos</p>
-        <button onClick={() => !createHab ? setCreateHab(true) : setCreateHab(false)}>+</button>
+        <button onClick={() => !createHab ? setCreateHab(true) : setCreateHab(false)} data-test='habit-create-btn'>+</button>
       </CreateHabitsHeader>
       {createHab && 
-        <CreateHabitContainer onSubmit={createHabit}>
+        <CreateHabitContainer onSubmit={createHabit} data-test='habit-create-container'>
           <input
             type="text"
             placeholder='nome do habito'
@@ -74,6 +74,7 @@ function CreateHabit( {reload, setReload} ) {
             onChange={(ev) => setName(ev.target.value)}
             required
             disabled={fieldStatus}
+            data-test='habit-name-input'
             />
           <ul>
             {WEEKDAYS.map((day, i) => (
@@ -81,16 +82,17 @@ function CreateHabit( {reload, setReload} ) {
                 key={i} 
                 value={i + 1} 
                 onClick={(ev) => addDay(ev)} selected={days.includes(i + 1)} 
-                disabled={fieldStatus}>
+                disabled={fieldStatus} 
+                data-test='habit-day'>
                 {day}
               </Day>)
             )}
           </ul>
           <div>
-            <button type="button" disabled={fieldStatus} onClick={resetForm}>
+            <button type="button" disabled={fieldStatus} onClick={resetForm} data-test='habit-create-cancel-btn'>
               {!fieldStatus ? 'Cancelar' : <ThreeDots width="35" height="35" color="#52B6FF" />}
             </button>
-            <button type="submit" disabled={fieldStatus}>
+            <button type="submit" disabled={fieldStatus} data-test='habit-create-save-btn'>
             {!fieldStatus ? 'Salvar' : <ThreeDots width="35" height="35" color="#fff" />}
             </button>
           </div>

@@ -49,6 +49,7 @@ function SignUpPage() {
           disabled={fieldStatus}
           value={email} 
           onChange={(ev) => setEmail(ev.target.value)} 
+          data-test='email-input'
         />
         <input 
           type="password" 
@@ -57,6 +58,7 @@ function SignUpPage() {
           disabled={fieldStatus}
           value={password} 
           onChange={(ev) => setPassword(ev.target.value)} 
+          data-test='password-input'
         />
         <input 
           type="text" 
@@ -65,6 +67,7 @@ function SignUpPage() {
           disabled={fieldStatus}
           value={name} 
           onChange={(ev) => setName(ev.target.value)} 
+          data-test='user-name-input'
         />
         <input 
           type="text" 
@@ -73,11 +76,12 @@ function SignUpPage() {
           disabled={fieldStatus}
           value={image} 
           onChange={(ev) => setImage(ev.target.value)} 
+          data-test='user-image'
         />
-        <button type='submit' disabled={fieldStatus}>
+        <button type='submit' disabled={fieldStatus} data-test='signup-btn'>
           {!fieldStatus ? 'Cadastrar' : <ThreeDots width="60" height="60" color="#ffffff" />}
         </button>
-        <Link to='/'>
+        <Link to='/' data-test='login-link'>
           <p>Já tem uma conta? Faça login!</p>
         </Link>
       </Form>

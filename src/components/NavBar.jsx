@@ -6,9 +6,9 @@ function NavBar() {
   const { logedUser } = useContext(LogedUserContext);
 
   return (
-    <Nav>
+    <Nav data-test='header'>
       <p>Trackit</p>
-      <img src={logedUser.image} alt="User photo" />
+      <img src={logedUser.image} alt="User photo" data-test='avatar'/>
     </Nav>
   );
 }

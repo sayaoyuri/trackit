@@ -59,18 +59,18 @@ function Habits() {
   return(
     <>
       <Header>
-        <h1>
+        <h1 data-test='today'>
           {`${FULLWEEKDAYS.at( dayjs().get('day') )}, ${dayjs().format('DD')}/${dayjs().format('MM') }`}
         </h1>
-        <p>{logedUser.dayProgressText}</p>
+        <p data-test='today-counter'>{logedUser.dayProgressText}</p>
       </Header>
       {
         logedUser.habits.map(habit => (
-          <Container key={habit.id} done={habit.done} current={habit.currentSequence} highest={habit.highestSequence}>
-            <h1>{habit.name}</h1>
-            <p>Sequência atual: <span className="current">{habit.currentSequence} dias</span></p>
-            <p>Seu recorde: <span className="highest">{habit.highestSequence} dias</span></p>
-            <Button checked={habit.done} onClick={() => checkHabit(habit)}>
+          <Container key={habit.id} done={habit.done} current={habit.currentSequence} highest={habit.highestSequence} data-test='today-habit-container'>
+            <h1 data-test='today-habit-name'>{habit.name}</h1>
+            <p data-test='today-habit-sequence'>Sequência atual: <span className="current">{habit.currentSequence} dias</span></p>
+            <p data-test='today-habit-record'>Seu recorde: <span className="highest">{habit.highestSequence} dias</span></p>
+            <Button checked={habit.done} onClick={() => checkHabit(habit)} data-test='today-habit-check-btn'>
               <img src={checkBtn} alt="Check Button" />
             </Button>
           </Container>

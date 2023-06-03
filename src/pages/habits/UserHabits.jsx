@@ -49,11 +49,11 @@ function UserHabits( {reload, setReload} ) {
   return (
     <>
       {userHabits.map((habbit) => (
-        <Habit key={habbit.id}>
-          <p>{habbit.name}</p>
-          <img src={delBtn} alt="Delete" onClick={() => deleteHabit(habbit.id)}/>
+        <Habit key={habbit.id} data-test='habit-container'>
+          <p data-test='habit-name'>{habbit.name}</p>
+          <img src={delBtn} alt="Delete" onClick={() => deleteHabit(habbit.id)} data-test='habit-delete-btn'/>
           <div>
-            {WEEKDAYS.map((day, i) => (<Day key={i} selected={habbit.days.includes(i + 1)}>{day}</Day>))}
+            {WEEKDAYS.map((day, i) => (<Day key={i} selected={habbit.days.includes(i + 1)} data-test='habit-day'>{day}</Day>))}
           </div>
         </Habit>
         )

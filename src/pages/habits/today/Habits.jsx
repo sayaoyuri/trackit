@@ -44,7 +44,7 @@ function Habits() {
         const done = aux.habits.map(habit => habit.done).filter(hab => hab === true).length;
 
         aux.dayProgressStat = done;
-        aux.dayProgressText = done === 0 ? 'Nenhum habito concluido hoje' : `${( done / aux.habits.length * 100 ).toFixed(0)}% dos hábitos concluídos`;
+        aux.dayProgressText = done === 0 ? 'Nenhum hábito concluído ainda' : `${( done / aux.habits.length * 100 ).toFixed(0)}% dos hábitos concluídos`;
 
         setLogedUser(aux);
       })
@@ -58,7 +58,7 @@ function Habits() {
 
   return(
     <>
-      <Header>
+      <Header hasDone={logedUser.dayProgressStat > 0}>
         <h1 data-test='today'>
           {`${FULLWEEKDAYS.at( dayjs().get('day') )}, ${dayjs().format('DD')}/${dayjs().format('MM') }`}
         </h1>
@@ -96,7 +96,7 @@ export const Header = styled.header`
   }
 
   p {
-    color: #8FC549;
+    color: ${props => props.hasDone ? '#8FC549' : '#BABABA'};
     font-size: 18px;
   }
 `;
@@ -139,7 +139,7 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => props.checked ? '#8FC549' : '#d6d3d3'};
+  background-color: ${props => props.checked ? '#8FC549' : '#EBEBEB'};
   border: none;
   border-radius: 5px;
   cursor: pointer;

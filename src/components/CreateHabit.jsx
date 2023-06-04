@@ -9,7 +9,8 @@ import { Day, CreateHabitsHeader, CreateHabitContainer } from "../pages/habits/C
 
 function CreateHabit( {reload, setReload} ) {
   const [createHab, setCreateHab] = useState(false);
-  const [fieldStatus, setFieldStatus] = useState (false);
+  const [fieldStatus, setFieldStatus] = useState(false);
+  const [createBtnSt, setCreateBtnSt] = useState(false);
   const [name, setName] = useState('');
   const [days, setDays] = useState( [] );
   console.log(days);
@@ -26,6 +27,7 @@ function CreateHabit( {reload, setReload} ) {
   function createHabit(ev) {
     ev.preventDefault();
     setFieldStatus(true);
+    setCreateBtnSt(true);
 
     const config = {
       headers: { Authorization: `Bearer ${logedUser.token}`}
@@ -38,11 +40,13 @@ function CreateHabit( {reload, setReload} ) {
         console.log(resp); 
         resetForm();
         setReload(reload + 1);
+        setCreateBtnSt(false);
       })
       .catch(error => {
         console.log(error);
         alert(error.response.data.message);
         setFieldStatus(false);
+        setCreateBtnSt(false);
       });
   }
 
@@ -63,7 +67,7 @@ function CreateHabit( {reload, setReload} ) {
     <>
       <CreateHabitsHeader>
         <p>Meus hábitos</p>
-        <button onClick={() => !createHab ? setCreateHab(true) : setCreateHab(false)} data-test='habit-create-btn'>+</button>
+        <button onClick={() => !createHab ? setCreateHab(true) : setCreateHab(false)} disabled={createBtnSt} data-test='habit-create-btn'>+</button>
       </CreateHabitsHeader>
       {createHab && 
         <CreateHabitContainer onSubmit={createHabit} data-test='habit-create-container'>
@@ -89,7 +93,7 @@ function CreateHabit( {reload, setReload} ) {
             )}
           </ul>
           <div>
-            <button type="button" disabled={fieldStatus} onClick={resetForm} data-test='habit-create-cancel-btn'>
+            <button type="button" disabled={fieldStatus} onClick={() => {setFieldStatus(false); setCreateHab(false)}} data-test='habit-create-cancel-btn'>
               {!fieldStatus ? 'Cancelar' : <ThreeDots width="35" height="35" color="#52B6FF" />}
             </button>
             <button type="submit" disabled={fieldStatus} data-test='habit-create-save-btn'>

@@ -25,7 +25,8 @@ function UserHabits( {reload, setReload} ) {
       .then(resp => console.log(resp))
       .catch(error => console.log(error));
       
-      setTimeout(() => setReload(reload + 1), 1000);
+      setReload(reload + 1)
+      // setTimeout(() => setReload(reload + 1), 1000);
     }
   }
 

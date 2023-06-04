@@ -26,7 +26,8 @@ function Habits() {
     .then(resp => console.log(resp))
     .catch(error => console.log(error));
 
-    setTimeout(() => setReload(reload + 1), 500)
+    setReload(reload + 1);
+    // setTimeout(() => setReload(reload + 1), 500)
   }
 
   useEffect(() => {

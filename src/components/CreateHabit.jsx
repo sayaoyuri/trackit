@@ -7,6 +7,8 @@ import { LogedUserContext } from "../context/LogedUserContext";
 
 import { Day, CreateHabitsHeader, CreateHabitContainer } from "../pages/habits/CreateHabitStyle";
 
+import plus from '../assets/images/plus.svg';
+
 function CreateHabit( {reload, setReload, createHab, setCreateHab} ) {
   const [fieldStatus, setFieldStatus] = useState(false);
   const [createBtnSt, setCreateBtnSt] = useState(false);
@@ -66,7 +68,13 @@ function CreateHabit( {reload, setReload, createHab, setCreateHab} ) {
     <>
       <CreateHabitsHeader>
         <p>Meus hábitos</p>
-        <button onClick={() => !createHab ? setCreateHab(true) : setCreateHab(false)} disabled={createBtnSt} data-test='habit-create-btn'>+</button>
+        <button 
+          onClick={() => !createHab ? setCreateHab(true) : setCreateHab(false)} 
+          disabled={createBtnSt} 
+          data-test='habit-create-btn'
+        >
+          <img src={plus} alt="+" />
+        </button>
       </CreateHabitsHeader>
       {createHab && 
         <CreateHabitContainer onSubmit={createHabit} data-test='habit-create-container'>

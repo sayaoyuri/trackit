@@ -43,7 +43,7 @@ function UserHabits( {reload, setReload, createHab} ) {
   }, [reload]);
 
   if(!userHabits || userHabits.length === 0) {
-    return <P>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</P>;
+    return <P createHab={createHab}>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</P>;
   }
 
   return (
@@ -73,14 +73,13 @@ const Container = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 15px;
   background-color: #e7e5e5;
 `;
 
 const P = styled.p`
-  margin: 44px 18px 0px 18px;
-  font-family: 'Lexend Deca';
+  margin: 0px 18px;
+  margin-top: 156px;
   font-size: 18px;
   color: #666666;
 `;
@@ -88,10 +87,8 @@ const P = styled.p`
 const Habit = styled.li`
   position: relative;
   width: 95%;
-  margin: 0px 10px;
-  font-family: 'Lexend Deca';
+  margin: 0px auto;
   background-color: #fff;
-  /* background-color: black; */
   padding: 10px;
   border-radius: 5px;
 
@@ -105,6 +102,8 @@ const Habit = styled.li`
     position: absolute;
     right: 10px;
     top: 5px;
+    width: 13px;
+    height: 15px;
     cursor: pointer;
   }
 

@@ -20,9 +20,10 @@ export const CreateHabitsHeader = styled.header`
     outline: none;
     border: none;
     border-radius: 5px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #fff;
-    font-size: 26px;
     background-color: #52B6FF;
     cursor: pointer;
   }
@@ -86,8 +87,6 @@ export const CreateHabitContainer = styled.form`
       border-radius: 5px;
       border: none;
       cursor: pointer;
-      margin-top: 29px;
-      font-size: 16px;
 
       display: flex; 
       justify-content: center;

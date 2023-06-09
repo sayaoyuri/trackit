@@ -16,8 +16,8 @@ function BottomNav() {
 
       <ProgressBar onClick={() => navigate('/hoje')}>
         <CircularProgressbar 
-          value={logedUser.dayProgressStat * 100}
-          maxValue={logedUser.habits.length * 100}
+          value={logedUser.dayProgressStat > 0 ? logedUser.dayProgressStat * 100 : 0}
+          maxValue={logedUser.habits.length > 0 ? logedUser.habits.length * 100 : 1}
           text={'Hoje'}
           background 
           backgroundPadding={6}
@@ -52,7 +52,7 @@ const Nav = styled.nav`
   text-decoration: none;
   font-size: 18px;
   color: #52B6FF;
-  background-color: #fff;
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 1)40%, rgba(255, 255, 255, 1) 100%);
 `;
 
 const ProgressBar = styled.div`

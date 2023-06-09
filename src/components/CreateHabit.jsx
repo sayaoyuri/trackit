@@ -7,8 +7,7 @@ import { LogedUserContext } from "../context/LogedUserContext";
 
 import { Day, CreateHabitsHeader, CreateHabitContainer } from "../pages/habits/CreateHabitStyle";
 
-function CreateHabit( {reload, setReload} ) {
-  const [createHab, setCreateHab] = useState(false);
+function CreateHabit( {reload, setReload, createHab, setCreateHab} ) {
   const [fieldStatus, setFieldStatus] = useState(false);
   const [createBtnSt, setCreateBtnSt] = useState(false);
   const [name, setName] = useState('');

@@ -8,7 +8,7 @@ import { LogedUserContext } from "../../context/LogedUserContext";
 import delBtn from '../../assets/images/delete.svg';
 import axios from "axios";
 
-function UserHabits( {reload, setReload} ) {
+function UserHabits( {reload, setReload, createHab} ) {
   const [userHabits, setUserHabits] = useState( undefined );
 
   const { logedUser } = useContext(LogedUserContext);
@@ -25,8 +25,7 @@ function UserHabits( {reload, setReload} ) {
       .then(resp => console.log(resp))
       .catch(error => console.log(error));
       
-      setReload(reload + 1)
-      // setTimeout(() => setReload(reload + 1), 1000);
+      setTimeout(() => setReload(reload + 1), 500);
     }
   }
 
@@ -48,7 +47,7 @@ function UserHabits( {reload, setReload} ) {
   }
 
   return (
-    <>
+    <Container createHab={createHab}>
       {userHabits.map((habbit) => (
         <Habit key={habbit.id} data-test='habit-container'>
           <p data-test='habit-name'>{habbit.name}</p>
@@ -59,11 +58,25 @@ function UserHabits( {reload, setReload} ) {
         </Habit>
         )
       )}
-    </>
+    </Container>
   );
 };
 
 export default UserHabits;
+
+const Container = styled.ul`
+  margin-top: ${props => props.createHab ? '360px' : '156px'};
+  margin-bottom: 96px;
+  min-height: calc(100vh - 250px);
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background-color: #e7e5e5;
+`;
 
 const P = styled.p`
   margin: 44px 18px 0px 18px;
@@ -72,14 +85,18 @@ const P = styled.p`
   color: #666666;
 `;
 
-const Habit = styled.section`
+const Habit = styled.li`
   position: relative;
-  margin: 35px 10px 35px 10px;
+  width: 95%;
+  margin: 0px 10px;
   font-family: 'Lexend Deca';
+  background-color: #fff;
+  /* background-color: black; */
+  padding: 10px;
+  border-radius: 5px;
 
   p {
     font-size: 20px;
-    margin-top: 30px;
     margin-bottom: 10px;
     color: #666666;
   }

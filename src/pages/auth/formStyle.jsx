@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Form = styled.form`
+background-color: #fff;
   width: 100%;
   min-height: 100vh;
   border: 2px solid black;

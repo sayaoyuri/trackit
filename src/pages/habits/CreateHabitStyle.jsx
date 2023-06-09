@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
 export const CreateHabitsHeader = styled.header`
-  margin: 108px 5px 28px 5px;
+  position: fixed;
+  z-index: 3;
+  top: 75px;
+  left: 0;
+  width: 100%;
+  background-color: #e7e5e5;
+  padding: 23px 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,6 +20,7 @@ export const CreateHabitsHeader = styled.header`
     outline: none;
     border: none;
     border-radius: 5px;
+    text-align: center;
     color: #fff;
     font-size: 26px;
     background-color: #52B6FF;
@@ -41,10 +48,15 @@ export const Day = styled.button`
 `;
 
 export const CreateHabitContainer = styled.form`
-  margin: 0px 36px;
+  position: fixed;
+  z-index: 5;
+  top: 156px;
+  width: 100%;
+  padding: 20px 36px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  background-color: #fff;
 
   input {
     width: 100%;

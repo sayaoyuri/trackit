@@ -1,14 +1,12 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-
+import { useContext } from "react";
 import { LogedUserContext } from "../context/LogedUserContext";
+import { useNavigate } from "react-router-dom";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 function BottomNav() {
   const { logedUser } = useContext(LogedUserContext);
   const navigate = useNavigate();
-
 
   return (
     <Nav data-test='menu'>

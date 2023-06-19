@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-
-import { BASE_URL } from '../../constants';
-import { Form } from './formStyle';
-import trackitLogo from '../../assets/images/TrackIt.svg';
+import { useNavigate } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
+import { Form } from './formStyle';
+import { BASE_URL } from '../../api/api';
+import trackitLogo from '../../assets/images/TrackIt.svg';
 
 function SignUpPage() {
   const [email, setEmail] = useState('');
@@ -81,9 +80,7 @@ function SignUpPage() {
         <button type='submit' disabled={fieldStatus} data-test='signup-btn'>
           {!fieldStatus ? 'Cadastrar' : <ThreeDots width="60" height="60" color="#ffffff" />}
         </button>
-        <Link to='/' data-test='login-link'>
-          <p>Já tem uma conta? Faça login!</p>
-        </Link>
+        <p onClick={() => navigate('/')}>Já tem uma conta? Faça login!</p>
       </Form>
   );
 }

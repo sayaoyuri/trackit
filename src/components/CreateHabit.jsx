@@ -1,12 +1,10 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
-import { BASE_URL, WEEKDAYS } from "../constants";
-
 import { LogedUserContext } from "../context/LogedUserContext";
-
+import { WEEKDAYS } from "../constants";
+import { BASE_URL, createConfig } from "../api/api";
 import { Day, CreateHabitsHeader, CreateHabitContainer } from "../pages/habits/CreateHabitStyle";
-
 import plus from '../assets/images/plus.svg';
 
 function CreateHabit( {reload, setReload, createHab, setCreateHab} ) {
@@ -30,9 +28,7 @@ function CreateHabit( {reload, setReload, createHab, setCreateHab} ) {
     setFieldStatus(true);
     setCreateBtnSt(true);
 
-    const config = {
-      headers: { Authorization: `Bearer ${logedUser.token}`}
-    }
+    const config = createConfig(logedUser.token);
 
     const body = { name, days };
 

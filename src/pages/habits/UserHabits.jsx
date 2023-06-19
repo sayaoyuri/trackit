@@ -1,38 +1,19 @@
-import { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
-import { Day } from "./CreateHabitStyle";
-
-import { BASE_URL, WEEKDAYS } from "../../constants";
-
-import { LogedUserContext } from "../../context/LogedUserContext";
-import delBtn from '../../assets/images/delete.svg';
 import axios from "axios";
+import styled from "styled-components";
+import { useContext, useEffect, useState } from "react";
+import { LogedUserContext } from "../../context/LogedUserContext";
+import { BASE_URL, createConfig, deleteHabit } from "../../api/api";
+import { WEEKDAYS } from "../../constants";
+import { Day } from "./CreateHabitStyle";
+import delBtn from '../../assets/images/delete.svg';
 
 function UserHabits( {reload, setReload, createHab} ) {
   const [userHabits, setUserHabits] = useState( undefined );
 
   const { logedUser } = useContext(LogedUserContext);
 
-  function deleteHabit(id) {
-    const del = confirm('Deseja deletar este habito?');
-
-    if(del) {
-      const config = {
-        headers: { Authorization: `Bearer ${logedUser.token}` }
-      }
-
-      axios.delete(`${BASE_URL}habits/${id}`, config)
-      .then(resp => console.log(resp))
-      .catch(error => console.log(error));
-      
-      setTimeout(() => setReload(reload + 1), 500);
-    }
-  }
-
   useEffect(() => {
-    const config = {
-      headers: { Authorization: `Bearer ${logedUser.token}` }
-    }
+    const config = createConfig(logedUser.token)
 
     axios.get(`${BASE_URL}habits`, config)
     .then(resp => {
@@ -51,7 +32,12 @@ function UserHabits( {reload, setReload, createHab} ) {
       {userHabits.map((habbit) => (
         <Habit key={habbit.id} data-test='habit-container'>
           <p data-test='habit-name'>{habbit.name}</p>
-          <img src={delBtn} alt="Delete" onClick={() => deleteHabit(habbit.id)} data-test='habit-delete-btn'/>
+          <img 
+            src={delBtn} 
+            alt="Delete" 
+            onClick={() => {deleteHabit(habbit.id, logedUser.token); setTimeout(() => setReload(reload + 1), 500) }} 
+            data-test='habit-delete-btn'
+          />
           <div>
             {WEEKDAYS.map((day, i) => (<Day key={i} selected={habbit.days.includes(i)} data-test='habit-day'>{day}</Day>))}
           </div>

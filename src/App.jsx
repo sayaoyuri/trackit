@@ -1,10 +1,10 @@
 import axios from "axios";
 import { LogedUserProvider } from "./context/LogedUserContext.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from './pages/auth/LoginPage.jsx';
-import SignUpPage from "./pages/auth/SignUpPage.jsx";
-import Habits from './pages/habits/Habits.jsx';
-import Today from "./pages/habits/today/Today.jsx";
+import LoginPage from './pages/LoginPage.jsx';
+import SignUpPage from "./pages/SignUpPage.jsx";
+import Habits from './pages/Habits.jsx';
+import Today from "./pages/Today.jsx";
 import History from "./pages/History.jsx";
 
 function App() {

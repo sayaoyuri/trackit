@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CreateHabitsHeader = styled.header`
+export const NewHabitHeader = styled.header`
   position: fixed;
   z-index: 3;
   top: 75px;
@@ -48,7 +48,7 @@ export const Day = styled.button`
   }
 `;
 
-export const CreateHabitContainer = styled.form`
+export const NewHabitContainer = styled.form`
   position: fixed;
   z-index: 5;
   top: 156px;

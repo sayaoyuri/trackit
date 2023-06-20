@@ -2,13 +2,14 @@ import axios from "axios";
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import 'react-circular-progressbar/dist/styles.css';
-import { LogedUserContext } from "../../../context/LogedUserContext";
-import { BASE_URL, createConfig } from "../../../api/api";
-import Day from './Date.jsx'
-import TodayHabits from "../../../components/TodayHabits";
-import BottomNav from "../../../components/BottomNav.jsx";
+import { LogedUserContext } from "../context/LogedUserContext";
+import { BASE_URL, createConfig } from "../api/api";
+import Day from '../components/Date.jsx'
+import TodayHabits from "../components/TodayHabits";
+import BottomNav from "../components/BottomNav.jsx";
+import NavBar from "../components/NavBar";
 
-function Habits() {
+function Today() {
   const { logedUser, setLogedUser } = useContext(LogedUserContext);
   const [ updatePage, setUpdatePage ] = useState(0);
 
@@ -38,6 +39,7 @@ function Habits() {
 
   return(
     <>
+      <NavBar />
       <Header hasDone={logedUser.dayProgressStat > 0}>
         <Day/>
         <p data-test='today-counter'>{logedUser.dayProgressText}</p>
@@ -50,7 +52,7 @@ function Habits() {
   );
 }
 
-export default Habits;
+export default Today;
 
 export const Header = styled.header`
   position: fixed;

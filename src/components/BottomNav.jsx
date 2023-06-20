@@ -51,8 +51,13 @@ const Nav = styled.nav`
   font-size: 18px;
   color: #52B6FF;
   background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 1)40%, rgba(255, 255, 255, 1) 100%);
+
+  p {
+    cursor: pointer;
+  }
 `;
 
 const ProgressBar = styled.div`
   width: 91px;
+  cursor: pointer;
 `;

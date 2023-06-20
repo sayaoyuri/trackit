@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { useContext, useState } from 'react';
-import { LogedUserContext } from '../../context/LogedUserContext';
+import { LogedUserContext } from '../context/LogedUserContext';
 import { useNavigate } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
-import { Form } from './formStyle';
-import { BASE_URL } from '../../api/api';
-import trackitLogo from '../../assets/images/TrackIt.svg';
+import { Form } from '../styledComponents/AuthFormStyle';
+import { BASE_URL } from '../api/api';
+import trackitLogo from '../assets/images/TrackIt.svg';
 
 function LoginPage() {
   const [email, setEmail] = useState('');

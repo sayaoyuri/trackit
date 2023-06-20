@@ -1,11 +1,11 @@
 import axios from "axios";
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
-import { LogedUserContext } from "../../context/LogedUserContext";
-import { BASE_URL, createConfig, deleteHabit } from "../../api/api";
-import { WEEKDAYS } from "../../constants";
-import { Day } from "./CreateHabitStyle";
-import delBtn from '../../assets/images/delete.svg';
+import { LogedUserContext } from "../context/LogedUserContext";
+import { BASE_URL, createConfig, deleteHabit } from "../api/api";
+import { WEEKDAYS } from "../constants";
+import { Day } from "../styledComponents/NewHabitStyle";
+import delBtn from '../assets/images/delete.svg';
 
 function UserHabits( {reload, setReload, createHab} ) {
   const [userHabits, setUserHabits] = useState( undefined );

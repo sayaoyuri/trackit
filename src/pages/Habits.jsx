@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
-import CreateHabit from "../../components/CreateHabit";
-import NavBar from "../../components/NavBar";
-import UserHabits from "./UserHabits";
-import BottomNav from "../.././components/BottomNav";
+import CreateHabit from "../components/NewHabit";
+import NavBar from "../components/NavBar";
+import UserHabits from "../components/UserHabits";
+import BottomNav from "../components/BottomNav";
 
 function Habits() {
   const [createHab, setCreateHab] = useState(false);

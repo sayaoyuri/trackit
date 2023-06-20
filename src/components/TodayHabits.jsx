@@ -38,7 +38,6 @@ function TodayHabits( {updatePage, setUpdatePage} ) {
 
 export default TodayHabits;
 
-
 const HabitList = styled.ul`
   display: flex;
   flex-direction: column;

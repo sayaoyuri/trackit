@@ -4,10 +4,10 @@ import { ThreeDots } from "react-loader-spinner";
 import { LogedUserContext } from "../context/LogedUserContext";
 import { WEEKDAYS } from "../constants";
 import { BASE_URL, createConfig } from "../api/api";
-import { Day, CreateHabitsHeader, CreateHabitContainer } from "../pages/habits/CreateHabitStyle";
+import { Day, NewHabitHeader, NewHabitContainer } from "../styledComponents/NewHabitStyle";
 import plus from '../assets/images/plus.svg';
 
-function CreateHabit( {reload, setReload, createHab, setCreateHab} ) {
+function NewHabit( {reload, setReload, createHab, setCreateHab} ) {
   const [fieldStatus, setFieldStatus] = useState(false);
   const [createBtnSt, setCreateBtnSt] = useState(false);
   const [name, setName] = useState('');
@@ -62,7 +62,7 @@ function CreateHabit( {reload, setReload, createHab, setCreateHab} ) {
 
   return (
     <>
-      <CreateHabitsHeader>
+      <NewHabitHeader>
         <p>Meus hábitos</p>
         <button 
           onClick={() => !createHab ? setCreateHab(true) : setCreateHab(false)} 
@@ -71,9 +71,9 @@ function CreateHabit( {reload, setReload, createHab, setCreateHab} ) {
         >
           <img src={plus} alt="+" />
         </button>
-      </CreateHabitsHeader>
+      </NewHabitHeader>
       {createHab && 
-        <CreateHabitContainer onSubmit={createHabit} data-test='habit-create-container'>
+        <NewHabitContainer onSubmit={createHabit} data-test='habit-create-container'>
           <input
             type="text"
             placeholder='nome do habito'
@@ -103,10 +103,10 @@ function CreateHabit( {reload, setReload, createHab, setCreateHab} ) {
             {!fieldStatus ? 'Salvar' : <ThreeDots width="35" height="35" color="#fff" />}
             </button>
           </div>
-        </CreateHabitContainer>
+        </NewHabitContainer>
       }
     </>
   );
 }
 
-export default CreateHabit;
+export default NewHabit;
